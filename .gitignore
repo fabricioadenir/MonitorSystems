@@ -1,0 +1,18 @@
+# IDE
+.vscode
+
+# Python
+core/__pycache__
+routine/__pycache__
+routine/schedulers/__pycache__
+system/__pycache__
+
+# Python Django
+core/migrations
+routine/migrations
+
+
+
+# SQLite
+db.sqlite3
+

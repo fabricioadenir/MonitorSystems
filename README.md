@@ -17,6 +17,13 @@ BackEnd e FrontEnd.
 Instalando
 =====
 
+**Executar**
+pip install -r requirements.txt
+python manage.py migrate
+python manage.py createsuperuser --email admin@example.com --username admin
+"crie sua senha"
+python manage.py runserver
+
 Depende de:
 * [Python 3](https://www.python.org/downloads/) (3+)(32bits)
 * [Pip](https://pypi.org/project/pip/)
