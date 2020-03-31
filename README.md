@@ -3,7 +3,7 @@
 # Monitoramento de Sistemas
 
 
-ProjetoMonitorarBases foi criado para gerenciar correções no sistema e localizar erros de inconsistências de informações.
+MonitorSystems foi criado para gerenciar correções nos sistemas e localizar erros de inconsistências de dados.
 
 BackEnd e FrontEnd.
 =====
@@ -14,26 +14,29 @@ BackEnd e FrontEnd.
 
 ***
 
-Instalando
+Depende de:
+* [Python 3](https://www.python.org/downloads/) (3+)
+
+Instalando Dependêncdias
 =====
 
-**Executar**
-pip install -r requirements.txt
-python manage.py migrate
-python manage.py createsuperuser --email admin@example.com --username admin
-"crie sua senha"
-python manage.py runserver
-
-Depende de:
-* [Python 3](https://www.python.org/downloads/) (3+)(32bits)
-* [Pip](https://pypi.org/project/pip/)
-* [Django](https://www.djangoproject.com/download/) (2.1.7+)
-* [SQL Server 2012](https://www.microsoft.com/pt-br/download/details.aspx?id=56042) ou (Usar o SQLite)
-
-
-### Instalando dependências
-Instalar as bibliotecas necessárias
-```sh
-pip install pyodbc
-pip install cx_Oracle
 ```
+pip  install -d requirements.txt
+```
+
+Executar os comandos:
+```
+python manage.py makemigrations
+
+python manage.py migrate
+
+python manage.py createsuperuser --email admin@example.com --username admin
+
+python manage.py runserver
+```
+
+
+## Contato
+Em caso de dúvidas ou encontrou um erro, entre em contato conosco através do e-mail ou abra uma issue no projeto:
+
+[Fabricio Silva](mailto:fabricioadenir@gmail.com)
