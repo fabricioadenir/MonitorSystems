@@ -16,7 +16,7 @@ Depende de:
 Instalando Dependêncdias
 =====
 ```
-pip  install -d requirements.txt
+pip  install -r requirements.txt
 ```
 Executar os comandos:
 ```
