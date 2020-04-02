@@ -5,10 +5,10 @@ class Connection():
     '''
     Classe responsável por conectar ao banco de dados 
 
-    Caso o bando de dados se conecte viu uri basta informar o tipo do bando ex: "MongoDB"
+    Caso o banco de dados não se conecte via uri basta informar o tipo do banco ex: "MongoDB"
     **kwargs com os dados para conexão
 
-    Caso o banco não seja via uri informe os dados para conexão e o tipo do banco.
+    Caso o banco seja via uri informe os dados para conexão e o tipo do banco.
     *args = uma uri valida **kwargs com o type do database
 
     '''
