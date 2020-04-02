@@ -78,6 +78,7 @@ class DataBases(models.Model):
         (u'oracle', u'Oracle'),
         (u'mongodb', u'MongoDB'),
         (u'postgresql', u'PostgreSQL'),
+        (u'mysql', u'MySQL'),
         (u'uri', u'Via URI'),
     )
     client = models.ForeignKey(
@@ -87,7 +88,13 @@ class DataBases(models.Model):
     _type = models.CharField(
         max_length=200, choices=DRIVE_CHOICES, verbose_name='Tipo de base ')
     server_instancia = models.CharField(
-        null=True, blank=True, max_length=50, verbose_name='IP:PORT ')
+        null=True, default=None, blank=True, max_length=50, verbose_name='Server Instancia ')
+    ip = models.CharField(
+        null=True, default=None, blank=True, max_length=50, verbose_name='IP ')
+    port = models.CharField(
+        null=True, default=None, blank=True, max_length=50, verbose_name='PORT ')
+    uri = models.CharField(
+        null=True, default=None, blank=True, max_length=50, verbose_name='URI ')
     database = models.CharField(
         primary_key=True, max_length=100, verbose_name='DataBase ')
     user = models.CharField(max_length=100, verbose_name='Usuário ')
@@ -126,8 +133,8 @@ class Monitoring(models.Model):
         Functionality, on_delete=models.CASCADE, verbose_name='Local do sistema ')
     database = models.ForeignKey(
         DataBases, on_delete=models.CASCADE, verbose_name='DataBase ')
-    max_count_query = models.PositiveIntegerField(
-        verbose_name='Limite de valores ')
+    timeout = models.PositiveIntegerField(
+        verbose_name='TimeOut em segundos ', help_text="Tempo de espera pela execução da query.")
     query = models.TextField(
         verbose_name='Query ')
     created_date = models.DateTimeField(
@@ -141,20 +148,19 @@ class Monitoring(models.Model):
     class Meta:
         verbose_name_plural = "Monitorar"
 
-
+def increment_invoice_number():
+    pass
 class QueryResults(models.Model):
     query = models.ForeignKey(
         Monitoring, on_delete=models.CASCADE, verbose_name='Query', editable=False)
-    execution_number = models.IntegerField(
-        default=0, verbose_name='Sequência de execução ', editable=False)
-    date_query = models.DateTimeField(
-        verbose_name='Data do monitoramento', editable=False)
     count_values = models.IntegerField(
         verbose_name='Quantidade de erros encontrado ', editable=False)
     values = models.TextField(
         null=True, verbose_name='Valores ', editable=False)
     note = models.TextField(
         null=True, verbose_name='Observação ', editable=False)
+    created_date = models.DateTimeField(
+        verbose_name='Data criação ', editable=False, auto_now_add=True)
 
     def __str__(self):
         return self.query

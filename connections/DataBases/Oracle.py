@@ -1,11 +1,12 @@
 import cx_Oracle
 
 class Oracle:
-    def __init__(self, server, user, pwd, db):
-        self.server = server
-        self.user = user
-        self.pwd = pwd
-        self.db = db
+    def __init__(self, **kwargs):
+        self.server = kwargs.get('server')
+        self.user = kwargs.get('user')
+        self.pwd = kwargs.get('pwd')
+        self.db = kwargs.get('database')
+        self.timeout = kwargs.get('timeout')
     
         db_config = (self.user + '/' + self.pwd + '@' + self.server + '/' + self.db)
 
@@ -16,6 +17,7 @@ class Oracle:
 
         except Exception as error:
             print('Error: connection not established {}'.format(error))
+            return None
 
         else:
             print('connection established') 
@@ -24,8 +26,8 @@ class Oracle:
         try:
             result = self.cursor.execute(query)
             return result.fetchall()
-        except:
-            print("Erro ao executar comando")
+        except Exception as error:
+            print(f"Error executing command {error}")
             return None
     
     def close(self):

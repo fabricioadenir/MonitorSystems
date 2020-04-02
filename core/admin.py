@@ -1,4 +1,5 @@
 from django.contrib import admin
+from django.shortcuts import redirect
 from .models import Client, System, Module, Functionality, Functionality, DataBases, Monitoring, QueryResults
 from .forms import BaseDeDadosForm
 
@@ -84,11 +85,11 @@ class MonitoringAdmin(admin.ModelAdmin):
     model = Monitoring
 
     list_display = ['name', 'source', 'description_source', 'client',
-                    'system', 'functionality', 'max_count_query', 'created_date', 'modified_date']
+                    'system', 'functionality', 'timeout', 'created_date', 'modified_date']
 
     list_filter = ['name', 'source', 'description_source', 'client',
                    'system', 'functionality', 'database',
-                   'max_count_query', 'created_date', 'modified_date']
+                   'timeout', 'created_date', 'modified_date']
 
     search_fields = ['name', 'source', 'description_source', 'client__id_client', 'system__id',
                      'functionality__description', 'database__database', 'sql_qtd_consulta', 'sql_valores_consulta']
@@ -100,18 +101,12 @@ admin.site.register(Monitoring, MonitoringAdmin)
 class QueryResultsAdmin(admin.ModelAdmin):
     model = QueryResults
 
-    list_display = ['query', 'get_name', 'execution_number',
-                    'date_query', 'count_values', 'values']
+    list_display = ['query',
+                    'created_date', 'count_values', 'values']
 
-    list_filter = ['query', 'execution_number', 'date_query', 'count_values']
+    list_filter = ['query', 'created_date', 'count_values']
 
-    search_fields = ['query', 'execution_number',
-                     'date_query', 'count_values', 'values']
-
-    def get_name(self, obj):
-        return obj.id.query
-    get_name.admin_order_field = 'query'
-    get_name.short_description = 'Nome da Consulta'
-
+    search_fields = ['query',
+                     'created_date', 'count_values', 'values']
 
 admin.site.register(QueryResults, QueryResultsAdmin)
