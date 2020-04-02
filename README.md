@@ -5,7 +5,7 @@ MonitorSystems foi criado para gerenciar correções nos sistemas e localizar er
 
 BackEnd e FrontEnd.
 =====
-* Back End: Realiza uma consulta para encontrar as rotinas a serem executadas, localizandoas e executando conforme cadastradas. Realizando o salvamento dessas informações obtidas pela rotina em uma base local. 
+* Back End: Realiza uma consulta para encontrar as rotinas a serem executadas, localizando-as e executando conforme cadastradas. Realizando o salvamento dessas informações obtidas pela rotina em uma base local. 
 
 * Front End: Responsável por disponibilizar os formulários de cadastros, consulta, alteração e remoção das rotinas no sistema e também responsável pela apresentação dos resultados das rotinas.
 
