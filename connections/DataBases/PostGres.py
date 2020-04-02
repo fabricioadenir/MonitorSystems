@@ -2,14 +2,15 @@ import psycopg2
 
 
 class Postgres:
-    def __init__(self, host, port, user, pwd, db):
-        self.host = host
-        self.port = port
-        self.user = user
-        self.pwd = pwd
-        self.db = db
+    def __init__(self, **kwargs):
+        self.ip = kwargs.get('ip')
+        self.port = kwargs.get('port')
+        self.user = kwargs.get('user')
+        self.pwd = kwargs.get('pwd')
+        self.db = kwargs.get('database')
+        self.timeout = kwargs.get('timeout')
     
-        db_config = {'dbname': self.db, 'host': self.host,
+        db_config = {'dbname': self.db, 'host': self.ip,
                      'password': self.pwd, 'port': self.port, 'user': self.user}
 
         try:
@@ -19,6 +20,7 @@ class Postgres:
 
         except Exception as error:
             print('Error: connection not established {}'.format(error))
+            return None
         else:
             print('connection established') 
     
@@ -26,8 +28,8 @@ class Postgres:
         try:
             result = self.cursor.execute(query)
             return result
-        except:
-            print("Erro ao executar comando")
+        except Exception as error:
+            print(f"Error executing command {error}")
             return None
     
     def close(self):

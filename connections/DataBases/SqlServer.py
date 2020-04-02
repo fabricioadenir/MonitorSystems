@@ -2,12 +2,13 @@ import pyodbc
 
 
 class SqlServer:
-    def __init__(self, server, user, pwd, db):
-        self.server = server
-        self.user = user
-        self.pwd = pwd
-        self.db = db
+    def __init__(self, **kwargs):
+        self.server = kwargs.get('server')
+        self.user = kwargs.get('user')
+        self.pwd = kwargs.get('pwd')
+        self.db = kwargs.get('database')
         self.driver = '{SQL Server}'
+        self.timeout = kwargs.get('timeout')
 
         db_config = ('DRIVER=' + self.driver + ';SERVER=' + self.server +
                      ';DATABASE=' + self.db + ';UID=' + self.user + ';PWD=' + self.pwd)
@@ -19,6 +20,7 @@ class SqlServer:
 
         except Exception as error:
             print('Error: connection not established {}'.format(error))
+            return None
         else:
             print('connection established')
 
@@ -26,10 +28,13 @@ class SqlServer:
         try:
             result = self.cursor.execute(query)
             return result.fetchall()
-        except:
-            print("Erro ao executar comando")
+        except Exception as error:
+            print(f"Error executing command {error}")
             return None
 
     def close(self):
-        self.connection.close()
-        self.cursor.close()
+        try:
+            self.connection.close()
+            self.cursor.close()
+        except Exception as error:
+            print(f"Error close connection {error}")
