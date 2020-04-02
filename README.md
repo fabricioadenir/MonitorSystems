@@ -13,7 +13,7 @@ BackEnd e FrontEnd.
 Depende de:
 * [Python 3](https://www.python.org/downloads/) (3+)
 
-Instalando Dependêncdias
+Instalando Dependências
 =====
 ```
 pip  install -r requirements.txt
