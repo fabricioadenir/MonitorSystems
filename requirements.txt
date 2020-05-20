@@ -7,3 +7,4 @@ cx-Oracle==7.3.0
 mysql-connector==2.2.9
 psycopg2==2.8.4
 pyodbc==4.0.30
+flake8
