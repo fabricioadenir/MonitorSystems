@@ -1,5 +1,5 @@
 from apscheduler.schedulers.background import BackgroundScheduler
-from routine.schedulers.monitoring import run_monitoring
+from .monitoring import run_monitoring
 
 def start():
     scheduler = BackgroundScheduler()

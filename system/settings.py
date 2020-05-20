@@ -25,15 +25,13 @@ SECRET_KEY = '96@-lut7ul$wsfp&j=pt=z86-t8b3=#&pddm3gvr*bf-k!9fzv'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['127.0.0.1', '.pythonanywhere.com']
+ALLOWED_HOSTS = ['127.0.0.1', 'localhost', '.pythonanywhere.com']
 
 
 # Application definition
 
 INSTALLED_APPS = [
-    # 'apps.core.apps.CoreConfig',
-    'core',
-    'routine.apps.RoutineConfig',
+    'core.apps.CoreConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -122,3 +120,6 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+
+#Routines execute
+EXECUTE_ROUTINE = False

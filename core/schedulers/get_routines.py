@@ -1,4 +1,4 @@
-from routine.models import Routines
+from core.models import Routines
 from datetime import datetime
 
 

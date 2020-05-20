@@ -152,18 +152,32 @@ def increment_invoice_number():
     pass
 class QueryResults(models.Model):
     query = models.ForeignKey(
-        Monitoring, on_delete=models.CASCADE, verbose_name='Query', editable=False)
+        Monitoring, on_delete=models.CASCADE, verbose_name='Query', editable=True)
     count_values = models.IntegerField(
-        verbose_name='Quantidade de erros encontrado ', editable=False)
+        verbose_name='Quantidade de erros encontrado ', editable=True)
     values = models.TextField(
-        null=True, verbose_name='Valores ', editable=False)
+        null=True, verbose_name='Valores ', editable=True)
     note = models.TextField(
-        null=True, verbose_name='Observação ', editable=False)
+        null=True, verbose_name='Observação ', editable=True)
     created_date = models.DateTimeField(
-        verbose_name='Data criação ', editable=False, auto_now_add=True)
+        verbose_name='Data criação ', editable=True, auto_now_add=True)
 
-    def __str__(self):
-        return self.query
+    # def __str__(self):
+    #     return self.query
 
     class Meta:
         verbose_name_plural = "QueryResults"
+
+
+class Routines(models.Model):
+    query = models.ForeignKey(Monitoring, on_delete=models.CASCADE, verbose_name='Query ')
+    active_query = models.BooleanField(verbose_name='Ativar consulta ')
+    initial_date = models.DateField('Inicio das consultas ')
+    and_date = models.DateField('Válido até ')
+    created_date = models.DateTimeField(
+        verbose_name='Data criação ', editable=False, auto_now_add=True)
+    modified_date = models.DateTimeField(
+        verbose_name='Data modificação ', editable=False, auto_now=True)
+
+    class Meta:
+        verbose_name_plural = "Rotina"

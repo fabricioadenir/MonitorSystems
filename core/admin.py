@@ -1,6 +1,6 @@
 from django.contrib import admin
 from django.shortcuts import redirect
-from .models import Client, System, Module, Functionality, Functionality, DataBases, Monitoring, QueryResults
+from .models import Client, System, Module, Functionality, Functionality, DataBases, Monitoring, QueryResults, Routines
 from .forms import BaseDeDadosForm
 
 
@@ -101,12 +101,23 @@ admin.site.register(Monitoring, MonitoringAdmin)
 class QueryResultsAdmin(admin.ModelAdmin):
     model = QueryResults
 
-    list_display = ['query',
+    list_display = [
                     'created_date', 'count_values', 'values']
 
-    list_filter = ['query', 'created_date', 'count_values']
+    list_filter = [ 'created_date', 'count_values']
 
-    search_fields = ['query',
+    search_fields = [
                      'created_date', 'count_values', 'values']
 
 admin.site.register(QueryResults, QueryResultsAdmin)
+
+class RoutineAdmin(admin.ModelAdmin):
+    model = Routines
+    list_display = ['query', 'active_query', 'initial_date', 'and_date', 'created_date', 'modified_date']
+
+    list_filter = ['query', 'active_query', 'initial_date', 'and_date', 'created_date', 'modified_date']
+
+    search_fields = ['query']
+
+
+admin.site.register(Routines, RoutineAdmin)

@@ -1,0 +1,211 @@
+{% extends 'core/base.html' %}
+{% block title %}Sistema de Monitoramento{% endblock %}
+{% block dashboard %} Monitoramentos {% endblock %}
+{% block content %}
+<div class="col-lg-3 col-md-6 col-sm-6">
+    <div class="card card-stats">
+        <div class="card-body ">
+            <div class="row">
+                <div class="col-5 col-md-4">
+                    <div class="icon-big text-center icon-success">
+                        <i class="nc-icon nc-paper text-primary"></i>
+                    </div>
+                </div>
+                <div class="col-7 col-md-8">
+                    <div class="numbers">
+                        <p class="card-category">Cadastrados</p>
+                        <p class="card-title">{{teste.registered_monitoring_count}}<p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="card-footer ">
+            <hr>
+            <div class="stats">
+                <i class="fa fa-search-plus"></i>
+                Verificar
+            </div>
+        </div>
+    </div>
+</div>
+<div class="col-lg-3 col-md-6 col-sm-6">
+    <div class="card card-stats">
+        <div class="card-body ">
+            <div class="row">
+                <div class="col-5 col-md-4">
+                    <!-- caso o monitoramento esteja abaixo da porcentagem esperada
+                        icon-danger text-danger ou success
+                    deve ficar em vermelo ou verde se tiver na media -->
+                    <div class="icon-big text-center icon-success">
+                        <i class="nc-icon nc-zoom-split text-success"></i>
+                    </div>
+                </div>
+                <div class="col-7 col-md-8">
+                    <div class="numbers">
+                        <p class="card-category">Monitorando</p>
+                        <p class="card-title">{{teste.monitoring_count_running}}<p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="card-footer ">
+            <hr>
+            <div class="stats">
+                <i class="fa fa-search-plus"></i>
+                Verificar
+            </div>
+        </div>
+    </div>
+</div>
+<div class="col-lg-3 col-md-6 col-sm-6">
+    <div class="card card-stats">
+        <div class="card-body ">
+            <div class="row">
+                <div class="col-5 col-md-4">
+                    <div class="icon-big text-center icon-success">
+                        <i class="nc-icon nc-satisfied text-success"></i>
+                    </div>
+                </div>
+                <div class="col-7 col-md-8">
+                    <div class="numbers">
+                        <p class="card-category">Sem Erros</p>
+                        <p class="card-title">{{teste.count_sucess}}<p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="card-footer ">
+            <hr>
+            <div class="stats">
+                <i class="fa fa-search-plus"></i>
+                Verificar
+            </div>
+        </div>
+    </div>
+</div>
+<div class="col-lg-3 col-md-6 col-sm-6">
+    <div class="card card-stats">
+        <div class="card-body ">
+            <div class="row">
+                <div class="col-5 col-md-4">
+                    <div class="icon-big text-center icon-danger">
+                        <i class="nc-icon nc-ambulance text-danger"></i>
+                    </div>
+                </div>
+                <div class="col-7 col-md-8">
+                    <div class="numbers">
+                        <p class="card-category">Com Erros</p>
+                        <p class="card-title">{{teste.count_error}}<p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="card-footer ">
+            <hr>
+            <div class="stats">
+                <i class="fa fa-search-plus"></i>
+                Verificar
+            </div>
+        </div>
+    </div>
+</div>
+<div class="col-lg-3 col-md-6 col-sm-6">
+    <div class="card card-stats">
+        <div class="card-body ">
+            <div class="row">
+                <div class="col-5 col-md-4">
+                    <div class="icon-big text-center icon-warning">
+                        <i class="nc-icon nc-settings text-warning"></i>
+                    </div>
+                </div>
+                <div class="col-7 col-md-8">
+                    <div class="numbers">
+                        <p class="card-category">Ag. Ativação</p>
+                        <p class="card-title">5<p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="card-footer ">
+            <hr>
+            <div class="stats">
+                <i class="fa fa-search-plus"></i>
+                Verificar
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <div class="card ">
+            <div class="card-header ">
+                <h5 class="card-title">Erros Encontrados</h5>
+                <p class="card-category">Ultimos 30 dias</p>
+            </div>
+            <div class="card-body ">
+                <canvas id=chartHours width="400" height="100"></canvas>
+            </div>
+            <div class="card-footer ">
+                <hr>
+                <div class="stats">
+                    <i class="fa fa-history"></i> Atualizado
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-4">
+        <div class="card ">
+            <div class="card-header ">
+                <h5 class="card-title">Top de erros</h5>
+                <p class="card-category">Funcionalidades com maiores problemas</p>
+            </div>
+            <div class="card-body ">
+                <canvas id="chartEmail"></canvas>
+            </div>
+            <div class="card-footer ">
+                <div class="legend">
+                    <i class="fa fa-circle text-primary"></i> Cadastro
+                    <i class="fa fa-circle text-warning"></i> Documentos
+                    <i class="fa fa-circle text-danger"></i> Fluxo
+                </div>
+                <hr>
+                <div class="stats">
+                    <i class="fa fa-calendar"></i> Selecionar periodo
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-8">
+        <div class="card">
+            <div class="card-header">
+                <h5 class="card-title">Nivel de cobertura</h5>
+                <p class="card-category">O quanto o sistema está sendo monitorado</p>
+            </div>
+            <div class="card-body">
+                <canvas id="speedChart" width="400" height="100"></canvas>
+            </div>
+            <div class="card-footer">
+                <div class="legend">
+                    <i class="fa fa-circle text-info"></i> Label 1
+                    <i class="fa fa-circle text-warning"></i> Label 2
+                </div>
+                <hr />
+                <div class="stats">
+                    <i class="fa fa-check"></i> Data information certified
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+{% block script %}
+<script>
+    var dados = "{{ teste.graphic_error | safe}}";
+    $(document).ready(function () {
+        // Javascript method's body can be found in assets/assets-for-demo/js/demo.js
+        demo.initChartsPages(dados);
+    });
+</script>
+{% endblock %}
