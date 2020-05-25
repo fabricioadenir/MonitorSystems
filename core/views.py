@@ -13,18 +13,18 @@ def dashboard(request):
     code_coverage = CodeCoverageStatistic()
     routine = RoutineStatistic()
 
-    data = {
+    context = {
         "registered_monitoring_count": monitoring.get_quantity_of_registered_monitoring(),
         "monitoring_count_running": routine.get_monitoring_count_running(),
         "count_sucess": query_result.get_quantity_of_results_with_success(),
         "count_error": query_result.get_quantity_of_results_with_errors(),
         "count_ag_ativation": monitoring.get_quantity_of_monitoring_waiting_for_activation(),
-        "graphic_error": query_result.get_results(),
-        "graphic_top_error": query_result.get_the_top_3_with_errors(),
-        "graphic_coverage_level": code_coverage.exemplo()
+        "graphic_error": json.dumps(query_result.get_results()),
+        "graphic_top_error": json.dumps(query_result.get_the_top_3_with_errors()),
+        "graphic_coverage_level": json.dumps(code_coverage.exemplo())
     }
 
-    return render(request, 'core/index.html', {'teste': data})
+    return render(request, 'core/index.html', context)
 
 
 def login(request):

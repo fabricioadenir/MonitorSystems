@@ -97,252 +97,31 @@ demo = {
   initChartsPages: function(dados) {
     chartColor = "#FFFFFF";
 
-    meu = dados;
+    rotinas = dados.list_of_routines;
+    erros = []
+    rotinas.forEach(element => {
+      var randomColorGenerator = function () { 
+        return '#' + (Math.random().toString(16) + '0000000').slice(2, 8); 
+      };
+      for (const key in element) {
+        rotina = {
+          data: element[key],
+          label: key,
+          borderColor: randomColorGenerator(),
+          fill: false
+        }
+        erros.push(rotina);
+      }
+    });
+
     ctx = document.getElementById('chartHours').getContext("2d");
-    console.log("CTX: ", meu)
-    backgroundColor: "rgba(23, 100, 13, 0.1)",
+
     myChart = new Chart(ctx, {
+      backgroundColor: "rgba(23, 100, 13, 0.1)",
       type: 'line',
       data: {
-        labels: [
-          "01 Abril 20",
-          "02 Abril",
-          "03 Abril",
-          "04 Abril",
-          "05 Abril",
-          "06 Abril",
-          "07 Abril",
-          "08 Abril",
-          "09 Abril",
-          "10 Abril",
-          "11 Abril",
-          "12 Abril",
-          "13 Abril",
-          "14 Abril",
-          "15 Abril",
-          "16 Abril",
-          "17 Abril",
-          "18 Abril",
-          "19 Abril",
-          "20 Abril",
-          "21 Abril",
-          "22 Abril",
-          "23 Abril",
-          "24 Abril",
-          "25 Abril",
-          "26 Abril",
-          "27 Abril",
-          "28 Abril",
-          "29 Abril",
-          "30 Abril",
-        ],
-        datasets: [{ 
-            data: [86,114,106,106,107,111,133,221,783,2478],
-            label: "Criação de documento",
-            borderColor: "#3e95cd",
-            fill: false
-          }, { 
-            data: [282,350,411,502,635,809,947,1402,3700,5267],
-            label: "fluxo de trabalho",
-            borderColor: "#8e5ea2",
-            fill: false
-          }, { 
-            data: [168,170,178,190,203,276,408,547,675,734],
-            label: "Assinatura",
-            borderColor: "#3cba9f",
-            fill: false
-          }, { 
-            data: [40,20,10,16,24,38,74,167,508,784],
-            label: "Consulta de aviso",
-            borderColor: "#e8c3b9",
-            fill: false
-          }, { 
-            data: [6,3,2,2,7,26,82,172,312,433],
-            label: "Integração",
-            borderColor: "#c45850",
-            fill: false
-          }, { 
-            data: [40,20,10,16,24,38,74,167,508,784],
-            label: "Consulta de aviso",
-            borderColor: "#e8c3b9",
-            fill: false
-          }, { 
-            data: [6,3,2,2,7,26,82,172,312,433],
-            label: "Integração",
-            borderColor: "#c45850",
-            fill: false
-          }, { 
-            data: [40,20,10,16,24,38,74,167,508,784],
-            label: "Consulta de aviso",
-            borderColor: "#e8c3b9",
-            fill: false
-          }, { 
-            data: [6,3,2,2,7,26,82,172,312,433],
-            label: "Integração",
-            borderColor: "#c45850",
-            fill: false
-          }, { 
-            data: [40,20,10,16,24,38,74,167,508,784],
-            label: "Consulta de aviso",
-            borderColor: "#e8c3b9",
-            fill: false
-          }, { 
-            data: [6,3,2,2,7,26,82,172,312,433],
-            label: "Integração",
-            borderColor: "#c45850",
-            fill: false
-          }, { 
-            data: [40,20,10,16,24,38,74,167,508,784],
-            label: "Consulta de aviso",
-            borderColor: "#e8c3b9",
-            fill: false
-          }, { 
-            data: [6,3,2,2,7,26,82,172,312,433],
-            label: "Integração",
-            borderColor: "#c45850",
-            fill: false
-          }, { 
-            data: [40,20,10,16,24,38,74,167,508,784],
-            label: "Consulta de aviso",
-            borderColor: "#e8c3b9",
-            fill: false
-          }, { 
-            data: [6,3,2,2,7,26,82,172,312,433],
-            label: "Integração",
-            borderColor: "#c45850",
-            fill: false
-          }, { 
-            data: [40,20,10,16,24,38,74,167,508,784],
-            label: "Consulta de aviso",
-            borderColor: "#e8c3b9",
-            fill: false
-          }, { 
-            data: [6,3,2,2,7,26,82,172,312,433],
-            label: "Integração",
-            borderColor: "#c45850",
-            fill: false
-          }, { 
-            data: [40,20,10,16,24,38,74,167,508,784],
-            label: "Consulta de aviso",
-            borderColor: "#e8c3b9",
-            fill: false
-          }, { 
-            data: [6,3,2,2,7,26,82,172,312,433],
-            label: "Integração",
-            borderColor: "#c45850",
-            fill: false
-          }, { 
-            data: [40,20,10,16,24,38,74,167,508,784],
-            label: "Consulta de aviso",
-            borderColor: "#e8c3b9",
-            fill: false
-          }, { 
-            data: [6,3,2,2,7,26,82,172,312,433, 455, 32, 56, 54],
-            label: "Integração",
-            borderColor: "#c45850",
-            fill: false
-          }, { 
-            data: [40,20,10,16,24,38,74,167,508,784],
-            label: "Consulta de aviso",
-            borderColor: "#e8c3b9",
-            fill: false
-          }, { 
-            data: [6,3,2,2,7,26,82,172,312,433],
-            label: "Integração",
-            borderColor: "#c45850",
-            fill: false
-          }, { 
-            data: [40,20,10,16,24,38,74,167,508,784],
-            label: "Consulta de aviso",
-            borderColor: "#e8c3b9",
-            fill: false
-          }, { 
-            data: [6,3,2,2,7,26,82,172,312,433],
-            label: "Integração",
-            borderColor: "#c45850",
-            fill: false
-          }, { 
-            data: [40,20,10,16,24,38,74,167,508,784],
-            label: "Consulta de aviso",
-            borderColor: "#e8c3b9",
-            fill: false
-          }, { 
-            data: [6,3,2,2,7,26,82,172,312,433],
-            label: "Integração",
-            borderColor: "#c45850",
-            fill: false
-          }, { 
-            data: [40,20,10,16,24,38,74,167,508,784],
-            label: "Consulta de aviso",
-            borderColor: "#e8c3b9",
-            fill: false
-          }, { 
-            data: [6,3,2,2,7,26,82,172,312,433],
-            label: "Integração",
-            borderColor: "#c45850",
-            fill: false
-          }, { 
-            data: [40,20,10,16,24,38,74,167,508,784],
-            label: "Consulta de aviso",
-            borderColor: "#e8c3b9",
-            fill: false
-          }, { 
-            data: [6,3,2,2,7,26,82,172,312,433],
-            label: "Integração",
-            borderColor: "#c45850",
-            fill: false
-          }, { 
-            data: [40,20,10,16,24,38,74,167,508,784],
-            label: "Consulta de aviso",
-            borderColor: "#e8c3b9",
-            fill: false
-          }, { 
-            data: [6,3,2,2,7,26,82,172,312,433],
-            label: "Integração",
-            borderColor: "#c45850",
-            fill: false
-          }, { 
-            data: [40,20,10,16,24,38,74,167,508,784],
-            label: "Consulta de aviso",
-            borderColor: "#e8c3b9",
-            fill: false
-          }, { 
-            data: [6,3,2,2,7,26,82,172,312,433],
-            label: "Integração",
-            borderColor: "#c45850",
-            fill: false
-          }, { 
-            data: [40,20,10,16,24,38,74,167,508,784],
-            label: "Consulta de aviso",
-            borderColor: "#e8c3b9",
-            fill: false
-          }, { 
-            data: [6,3,2,2,7,26,82,172,312,433],
-            label: "Integração",
-            borderColor: "#c45850",
-            fill: false
-          }, { 
-            data: [40,20,10,16,24,38,74,167,508,784],
-            label: "Consulta de aviso",
-            borderColor: "#e8c3b9",
-            fill: false
-          }, { 
-            data: [6,3,2,2,7,26,82,172,312,433],
-            label: "Integração",
-            borderColor: "#c45850",
-            fill: false
-          }, { 
-            data: [40,20,10,16,24,38,74,167,508,784],
-            label: "Consulta de aviso",
-            borderColor: "#e8c3b9",
-            fill: false
-          }, { 
-            data: [6,3,2,2,7,26,82,172,312,433],
-            label: "Integração",
-            borderColor: "#c45850",
-            fill: false
-          }
-        ]
+        labels: dados.days_of_the_month,
+        datasets: erros
       },
       options: {
         title: {
@@ -354,12 +133,12 @@ demo = {
         },
       }
     });
-
+    
 
     ctx = document.getElementById('chartEmail').getContext("2d");
 
     myChart = new Chart(ctx, {
-      type: 'pie',
+      type: 'bar',
       data: {
         labels: ["Documentos", "Fluxo", "Cadastro"],
         datasets: [{
@@ -430,109 +209,18 @@ demo = {
     });
   },
 
-  initGoogleMaps: function() {
-    var myLatlng = new google.maps.LatLng(40.748817, -73.985428);
-    var mapOptions = {
-      zoom: 13,
-      center: myLatlng,
-      scrollwheel: false, //we disable de scroll over the map, it is a really annoing when you scroll through page
-      styles: [{
-        "featureType": "water",
-        "stylers": [{
-          "saturation": 43
-        }, {
-          "lightness": -11
-        }, {
-          "hue": "#0088ff"
-        }]
-      }, {
-        "featureType": "road",
-        "elementType": "geometry.fill",
-        "stylers": [{
-          "hue": "#ff0000"
-        }, {
-          "saturation": -100
-        }, {
-          "lightness": 99
-        }]
-      }, {
-        "featureType": "road",
-        "elementType": "geometry.stroke",
-        "stylers": [{
-          "color": "#808080"
-        }, {
-          "lightness": 54
-        }]
-      }, {
-        "featureType": "landscape.man_made",
-        "elementType": "geometry.fill",
-        "stylers": [{
-          "color": "#ece2d9"
-        }]
-      }, {
-        "featureType": "poi.park",
-        "elementType": "geometry.fill",
-        "stylers": [{
-          "color": "#ccdca1"
-        }]
-      }, {
-        "featureType": "road",
-        "elementType": "labels.text.fill",
-        "stylers": [{
-          "color": "#767676"
-        }]
-      }, {
-        "featureType": "road",
-        "elementType": "labels.text.stroke",
-        "stylers": [{
-          "color": "#ffffff"
-        }]
-      }, {
-        "featureType": "poi",
-        "stylers": [{
-          "visibility": "off"
-        }]
-      }, {
-        "featureType": "landscape.natural",
-        "elementType": "geometry.fill",
-        "stylers": [{
-          "visibility": "on"
-        }, {
-          "color": "#b8cb93"
-        }]
-      }, {
-        "featureType": "poi.park",
-        "stylers": [{
-          "visibility": "on"
-        }]
-      }, {
-        "featureType": "poi.sports_complex",
-        "stylers": [{
-          "visibility": "on"
-        }]
-      }, {
-        "featureType": "poi.medical",
-        "stylers": [{
-          "visibility": "on"
-        }]
-      }, {
-        "featureType": "poi.business",
-        "stylers": [{
-          "visibility": "simplified"
-        }]
-      }]
 
-    }
-    var map = new google.maps.Map(document.getElementById("map"), mapOptions);
+  //   }
+  //   var map = new google.maps.Map(document.getElementById("map"), mapOptions);
 
-    var marker = new google.maps.Marker({
-      position: myLatlng,
-      title: "Hello World!"
-    });
+  //   var marker = new google.maps.Marker({
+  //     position: myLatlng,
+  //     title: "Hello World!"
+  //   });
 
-    // To add the marker to the map, call setMap();
-    marker.setMap(map);
-  },
+  //   // To add the marker to the map, call setMap();
+  //   marker.setMap(map);
+  // },
 
   showNotification: function(from, align) {
     color = 'primary';
@@ -552,129 +240,3 @@ demo = {
   }
 
 };
-
-
-
-
-
-
-// {
-//   type: 'line',
-
-//   data: {
-    // labels: [
-    //   "01 Abril",
-    //   "02 Abril",
-    //   "03 Abril",
-    //   "04 Abril",
-    //   "05 Abril",
-    //   "06 Abril",
-    //   "07 Abril",
-    //   "08 Abril",
-    //   "09 Abril",
-    //   "10 Abril",
-    //   "11 Abril",
-    //   "12 Abril",
-    //   "13 Abril",
-    //   "14 Abril",
-    //   "15 Abril",
-    //   "16 Abril",
-    //   "17 Abril",
-    //   "18 Abril",
-    //   "19 Abril",
-    //   "20 Abril",
-    //   "21 Abril",
-    //   "22 Abril",
-    //   "23 Abril",
-    //   "24 Abril",
-    //   "25 Abril",
-    //   "26 Abril",
-    //   "27 Abril",
-    //   "28 Abril",
-    //   "29 Abril",
-    //   "30 Abril",
-    // ],
-//     datasets: [{
-//         label: "Cadastro documento",
-//         borderColor: "#6bd098",
-//         backgroundColor: "rgba(23, 100, 13, 0.1)",
-//         pointRadius: 0,
-//         pointHoverRadius: 0,
-//         borderWidth: 3,
-//         data: [0, 2, 2, 2, 8, 8, 34, 150, 200, 354]
-//       },
-//       {
-//         label: "Intimação",
-//         borderColor: "#f17e5d",
-//         backgroundColor: "rgba(23, 0, 100, 0.1)",
-//         pointRadius: 0,
-//         pointHoverRadius: 0,
-//         borderWidth: 3,
-//         data: [0, 0, 10, 3, 29, 0, 34, 150, 200, 230]
-//       },
-//       {
-//         label: "Liberar documento",
-//         borderColor: "#fcc468",
-//         backgroundColor: "rgba(90, 100, 100, 0.1)",
-//         pointRadius: 0,
-//         pointHoverRadius: 0,
-//         borderWidth: 3,
-//         data: [270, 394, 415, 409, 425, 445, 460, 450, 478, 484]
-//       }
-//     ]
-//   },
-//   options: {
-//     hover: {
-//       mode: 'nearest',
-//       intersect: true
-//     },
-//     legend: {
-//       display: false,
-//       position: 'top'
-//     },
-//     tooltips: {
-//       enabled: true
-//     },
-
-//     scales: {
-//       yAxes: [{
-//         display: true,
-//         scaleLabel: {
-//           display: true,
-//           labelString: 'Month'
-//         },
-//         ticks: {
-//           fontColor: "#9f9f9f",
-//           beginAtZero: false,
-//           maxTicksLimit: 5,
-//           //padding: 20
-//         },
-//         gridLines: {
-//           drawBorder: false,
-//           zeroLineColor: "#ccc",
-//           color: 'rgba(255,255,255,0.05)'
-//         }
-
-//       }],
-
-//       xAxes: [{
-//         display: true,
-//         scaleLabel: {
-//           display: true,
-//           labelString: 'Month'
-//         },
-//         barPercentage: 1.6,
-//         gridLines: {
-//           drawBorder: false,
-//           color: 'rgba(255,255,255,0.1)',
-//           zeroLineColor: "transparent",
-//           display: false,
-//         },
-//         ticks: {
-//           padding: 20,
-//           fontColor: "#9f9f9f"
-//         }
-//       }]
-//     },
-//   }
-// }

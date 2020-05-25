@@ -14,7 +14,7 @@
                 <div class="col-7 col-md-8">
                     <div class="numbers">
                         <p class="card-category">Cadastrados</p>
-                        <p class="card-title">{{teste.registered_monitoring_count}}<p>
+                        <p class="card-title">{{registered_monitoring_count}}<p>
                     </div>
                 </div>
             </div>
@@ -43,7 +43,7 @@
                 <div class="col-7 col-md-8">
                     <div class="numbers">
                         <p class="card-category">Monitorando</p>
-                        <p class="card-title">{{teste.monitoring_count_running}}<p>
+                        <p class="card-title">{{monitoring_count_running}}<p>
                     </div>
                 </div>
             </div>
@@ -69,7 +69,7 @@
                 <div class="col-7 col-md-8">
                     <div class="numbers">
                         <p class="card-category">Sem Erros</p>
-                        <p class="card-title">{{teste.count_sucess}}<p>
+                        <p class="card-title">{{count_sucess}}<p>
                     </div>
                 </div>
             </div>
@@ -95,7 +95,7 @@
                 <div class="col-7 col-md-8">
                     <div class="numbers">
                         <p class="card-category">Com Erros</p>
-                        <p class="card-title">{{teste.count_error}}<p>
+                        <p class="card-title">{{count_error}}<p>
                     </div>
                 </div>
             </div>
@@ -202,7 +202,7 @@
 {% endblock %}
 {% block script %}
 <script>
-    var dados = "{{ teste.graphic_error | safe}}";
+    var dados = JSON.parse('{{ graphic_error|safe }}');
     $(document).ready(function () {
         // Javascript method's body can be found in assets/assets-for-demo/js/demo.js
         demo.initChartsPages(dados);
