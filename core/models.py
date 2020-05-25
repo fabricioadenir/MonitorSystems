@@ -21,7 +21,6 @@ class System(models.Model):
     client = models.ForeignKey(
         Client, on_delete=models.CASCADE, verbose_name='Cliente ')
     name = models.CharField(max_length=250, verbose_name='Sistema ')
-    slug = models.SlugField(max_length=50, db_index=True)
     initials = models.CharField(
         max_length=10, verbose_name='Sigla do sistema ')
     created_date = models.DateTimeField(
@@ -137,6 +136,8 @@ class Monitoring(models.Model):
         verbose_name='TimeOut em segundos ', help_text="Tempo de espera pela execução da query.")
     query = models.TextField(
         verbose_name='Query ')
+    last_execution = models.DateField(verbose_name="Ultima execução",
+                                      null=True)
     created_date = models.DateTimeField(
         verbose_name='Data criação ', editable=False, auto_now_add=True)
     modified_date = models.DateTimeField(
@@ -148,8 +149,11 @@ class Monitoring(models.Model):
     class Meta:
         verbose_name_plural = "Monitorar"
 
+
 def increment_invoice_number():
     pass
+
+
 class QueryResults(models.Model):
     query = models.ForeignKey(
         Monitoring, on_delete=models.CASCADE, verbose_name='Query', editable=True)
@@ -170,7 +174,8 @@ class QueryResults(models.Model):
 
 
 class Routines(models.Model):
-    query = models.ForeignKey(Monitoring, on_delete=models.CASCADE, verbose_name='Query ')
+    query = models.ForeignKey(
+        Monitoring, on_delete=models.CASCADE, verbose_name='Query ')
     active_query = models.BooleanField(verbose_name='Ativar consulta ')
     initial_date = models.DateField('Inicio das consultas ')
     and_date = models.DateField('Válido até ')

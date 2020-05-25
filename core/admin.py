@@ -85,11 +85,11 @@ class MonitoringAdmin(admin.ModelAdmin):
     model = Monitoring
 
     list_display = ['name', 'source', 'description_source', 'client',
-                    'system', 'functionality', 'timeout', 'created_date', 'modified_date']
+                    'system', 'last_execution', 'functionality', 'timeout', 'created_date', 'modified_date']
 
     list_filter = ['name', 'source', 'description_source', 'client',
                    'system', 'functionality', 'database',
-                   'timeout', 'created_date', 'modified_date']
+                   'timeout', 'last_execution', 'created_date', 'modified_date']
 
     search_fields = ['name', 'source', 'description_source', 'client__id_client', 'system__id',
                      'functionality__description', 'database__database', 'sql_qtd_consulta', 'sql_valores_consulta']
