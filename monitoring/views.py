@@ -1,9 +1,9 @@
 from django.shortcuts import render
 import json
-from core.general_statistics.monitoring_statistic import MonitoringStatistic
-from core.general_statistics.query_result_statistic import QueryResultsStatistic
-from core.general_statistics.code_coverage_statistic import CodeCoverageStatistic
-from core.general_statistics.routines_statistic import RoutineStatistic
+from monitoring.general_statistics.monitoring_statistic import MonitoringStatistic
+from monitoring.general_statistics.query_result_statistic import QueryResultsStatistic
+from monitoring.general_statistics.code_coverage_statistic import CodeCoverageStatistic
+from monitoring.general_statistics.routines_statistic import RoutineStatistic
 # Create your views here.
 
 
@@ -24,12 +24,12 @@ def dashboard(request):
         "graphic_coverage_level": json.dumps(code_coverage.exemplo())
     }
 
-    return render(request, 'core/index.html', context)
+    return render(request, 'monitoring/index.html', context)
 
 
 def login(request):
-    return render(request, 'core/login.html')
+    return render(request, 'monitoring/login.html')
 
 
 def user(request):
-    return render(request, 'core/user.html')
+    return render(request, 'monitoring/user.html')

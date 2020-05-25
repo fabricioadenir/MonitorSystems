@@ -166,8 +166,8 @@ class QueryResults(models.Model):
     created_date = models.DateTimeField(
         verbose_name='Data criação ', editable=True, auto_now_add=True)
 
-    # def __str__(self):
-    #     return self.query
+    def __str__(self):
+        return self.query.name
 
     class Meta:
         verbose_name_plural = "QueryResults"

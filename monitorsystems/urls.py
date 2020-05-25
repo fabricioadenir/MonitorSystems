@@ -1,4 +1,4 @@
-"""system URL Configuration
+"""MonitorSystems URL Configuration
 
 The `urlpatterns` list routes URLs to views. For more information please see:
     https://docs.djangoproject.com/en/3.0/topics/http/urls/
@@ -19,6 +19,6 @@ from django.urls import path, include
 # from ..routine import views
 
 urlpatterns = [
-    path('', include('core.urls')),
+    path('', include('monitoring.urls')),
     path('admin/', admin.site.urls),
 ]
