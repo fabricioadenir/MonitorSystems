@@ -101,13 +101,11 @@ admin.site.register(Monitoring, MonitoringAdmin)
 class QueryResultsAdmin(admin.ModelAdmin):
     model = QueryResults
 
-    list_display = [
-                    'created_date', 'count_values', 'values']
+    list_display = ['query', 'created_date', 'count_values', 'values']
 
-    list_filter = [ 'created_date', 'count_values']
+    list_filter = ['query', 'created_date', 'count_values']
 
-    search_fields = [
-                     'created_date', 'count_values', 'values']
+    search_fields = ['query', 'created_date', 'count_values', 'values']
 
 admin.site.register(QueryResults, QueryResultsAdmin)
 

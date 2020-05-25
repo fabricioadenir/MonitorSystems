@@ -1,4 +1,4 @@
-from core.models import Routines
+from monitoring.models import Routines
 
 class RoutineStatistic:
     

@@ -1,4 +1,4 @@
-from core.models import Monitoring
+from monitoring.models import Monitoring
 
 
 class MonitoringStatistic:

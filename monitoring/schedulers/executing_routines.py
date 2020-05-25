@@ -1,6 +1,6 @@
 from .get_routines import GetRoutines
 from connections.connection import Connection
-from core.models import QueryResults
+from monitoring.models import QueryResults
 from datetime import date
 
 

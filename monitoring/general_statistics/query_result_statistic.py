@@ -1,4 +1,4 @@
-from core.models import QueryResults
+from monitoring.models import QueryResults
 from django.utils import timezone
 from datetime import date, timedelta
 import locale
