@@ -6,7 +6,7 @@ logger = logging.getLogger(__name__)
 
 class Connection():
     '''
-    Classe responsável por conectar ao banco de dados 
+    Classe responsável por conectar ao banco de dados
 
     Caso o banco de dados não se conecte via uri basta informar o tipo do banco ex: "MongoDB"
     **kwargs com os dados para conexão
