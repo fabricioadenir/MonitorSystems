@@ -4,10 +4,14 @@ from monitoring.general_statistics.monitoring_statistic import MonitoringStatist
 from monitoring.general_statistics.query_result_statistic import QueryResultsStatistic
 from monitoring.general_statistics.code_coverage_statistic import CodeCoverageStatistic
 from monitoring.general_statistics.routines_statistic import RoutineStatistic
+import logging
 # Create your views here.
+
+logger = logging.getLogger(__name__)
 
 
 def dashboard(request):
+    logger.info("Carregando Pagina Dashboard...")
     monitoring = MonitoringStatistic()
     query_result = QueryResultsStatistic()
     code_coverage = CodeCoverageStatistic()
