@@ -58,7 +58,7 @@ class Functionality(models.Model):
         Module, on_delete=models.CASCADE, verbose_name='Modulo')
     name = models.CharField(max_length=250, verbose_name='Funcionalidade ')
     description = models.CharField(
-        primary_key=True, max_length=250, verbose_name='Descrição da funcionalidade ')
+        max_length=250, verbose_name='Descrição da funcionalidade ')
     created_date = models.DateTimeField(
         verbose_name='Data criação ', editable=False, auto_now_add=True)
     modified_date = models.DateTimeField(
@@ -95,9 +95,11 @@ class DataBases(models.Model):
     uri = models.CharField(
         null=True, default=None, blank=True, max_length=50, verbose_name='URI ')
     database = models.CharField(
-        primary_key=True, max_length=100, verbose_name='DataBase ')
-    user = models.CharField(max_length=100, verbose_name='Usuário ')
-    password = models.CharField(max_length=50, verbose_name='Senha ')
+        max_length=100, verbose_name='DataBase ')
+    user = models.CharField(
+        null=True, default=None, blank=True, max_length=100, verbose_name='Usuário ')
+    password = models.CharField(
+        null=True, default=None, blank=True, max_length=50, verbose_name='Senha ')
     created_date = models.DateTimeField(
         verbose_name='Data criação ', editable=False, auto_now_add=True)
     modified_date = models.DateTimeField(
