@@ -2,6 +2,9 @@ from .databases.postgres import Postgres
 from .databases.oracle import Oracle
 from .databases.sqlserver import SqlServer
 from .databases.mysql import MySql
+import logging
+
+logger = logging.getLogger(__name__)
 
 
 class GetResults:
@@ -16,7 +19,7 @@ class GetResults:
                 return results
             return None
         except Exception as e:
-            print(f"Erro detalhes: {e}")
+            logger.error(f"Erro detalhes: {e}")
 
     def __get_cursor(self, _type):
         connectios = {

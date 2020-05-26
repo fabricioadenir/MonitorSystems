@@ -1,5 +1,8 @@
 from monitoring.models import Routines
 from datetime import datetime
+import logging
+
+logger = logging.getLogger(__name__)
 
 
 class GetRoutines:
@@ -23,6 +26,6 @@ class GetRoutines:
                     all_routines.append(routine)
 
             except Exception as error:
-                print(f"Error in get_list_routines {error}")
+                logger.error(f"Error in get_list_routines {error}")
                 return None
         return all_routines

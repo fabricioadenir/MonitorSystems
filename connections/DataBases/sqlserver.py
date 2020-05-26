@@ -1,5 +1,8 @@
 import pyodbc
 from .baseconnection import BaseConnection
+import logging
+
+logger = logging.getLogger(__name__)
 
 
 class SqlServer(BaseConnection):
@@ -12,22 +15,22 @@ class SqlServer(BaseConnection):
                      ';DATABASE=' + self.db_or_index + ';UID=' + self.user + ';PWD=' + self.pwd)
 
         try:
-            print('connecting to SQL Server database...')
+            logger.info('connecting to SQL Server database...')
             self.connection = pyodbc.connect(db_config, autocommit=False)
             self.cursor = self.connection.cursor()
 
         except Exception as error:
-            print('Error: connection not established {}'.format(error))
+            logger.error('Error: connection not established {}'.format(error))
             return None
         else:
-            print('connection established')
+            logger.info('connection established')
 
     def query(self, query):
         try:
             result = self.cursor.execute(query)
             return result.fetchall()
         except Exception as error:
-            print(f"Error executing command {error}")
+            logger.error(f"Error executing command {error}")
             return None
 
     def close(self):
@@ -35,4 +38,4 @@ class SqlServer(BaseConnection):
             self.connection.close()
             self.cursor.close()
         except Exception as error:
-            print(f"Error close connection {error}")
+            logger.error(f"Error close connection {error}")

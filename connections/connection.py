@@ -1,4 +1,7 @@
 from .get_results import GetResults
+import logging
+
+logger = logging.getLogger(__name__)
 
 
 class Connection():
@@ -23,7 +26,6 @@ class Connection():
         self.__pwd = kwargs.get('pwd')
         self.__database = kwargs.get('database')
         self.__server = kwargs.get('server')
-
 
     def __data_connect(self):
         data = {}
@@ -51,6 +53,6 @@ class Connection():
         try:
             result = GetResults().get_results(query, self.__type, self.__data_connect())
             return result
-        except:
+        except Exception as error:
+            logger.error(f"Error in executing. Details: {error}")
             return None
-        

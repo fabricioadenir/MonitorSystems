@@ -2,6 +2,9 @@ from .get_routines import GetRoutines
 from connections.connection import Connection
 from monitoring.models import QueryResults
 from datetime import date
+import logging
+
+logger = logging.getLogger(__name__)
 
 
 class ExecutingRoutines(object):
@@ -24,7 +27,7 @@ class ExecutingRoutines(object):
                 query.last_execution = self.today
                 query.save(update_fields=['last_execution'])
             except Exception as error:
-                print(f"Erro ao Salvar. Detalhes: {error}")
+                logger.error(f"Erro ao Salvar. Detalhes: {error}")
 
     def build_info_executer(self, routine):
         data_connection = {}
@@ -55,7 +58,7 @@ class ExecutingRoutines(object):
         self.save_results(results, routine.query)
 
     def exectute(self):
-        print("Solititado execução de rotina")
+        logger.info("Solititado execução de rotina")
         for routine in self.all_routines:
             query, data_connect = self.build_info_executer(routine)
             query = self.build_query_for_type(query, data_connect['type'])

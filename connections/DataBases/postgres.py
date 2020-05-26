@@ -1,5 +1,8 @@
 import psycopg2
 from .baseconnection import BaseConnection
+import logging
+
+logger = logging.getLogger(__name__)
 
 
 class Postgres(BaseConnection):
@@ -10,22 +13,22 @@ class Postgres(BaseConnection):
                      'password': self.pwd, 'port': self.port, 'user': self.user}
 
         try:
-            print('connecting to PostgreSQL database...')
+            logger.info('connecting to PostgreSQL database...')
             self.connection = psycopg2.connect(**db_config)
             self.cursor = self.connection.cursor()
 
         except Exception as error:
-            print('Error: connection not established {}'.format(error))
+            logger.error('Error: connection not established {}'.format(error))
             return None
         else:
-            print('connection established')
+            logger.info('connection established')
 
     def query(self, query):
         try:
             result = self.cursor.execute(query)
             return result
         except Exception as error:
-            print(f"Error executing command {error}")
+            logger.error(f"Error executing command {error}")
             return None
 
     def close(self):

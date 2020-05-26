@@ -1,5 +1,8 @@
 import cx_Oracle
 from .baseconnection import BaseConnection
+import logging
+
+logger = logging.getLogger(__name__)
 
 
 class Oracle(BaseConnection):
@@ -11,23 +14,23 @@ class Oracle(BaseConnection):
                      '@' + self.server + '/' + self.db_or_index)
 
         try:
-            print('connecting to Oracle database...')
+            logger.info('connecting to Oracle database...')
             self.connection = cx_Oracle.connect(db_config)
             self.cursor = self.connection.cursor()
 
         except Exception as error:
-            print('Error: connection not established {}'.format(error))
+            logger.error('Error: connection not established {}'.format(error))
             return None
 
         else:
-            print('connection established')
+            logger.info('connection established')
 
     def query(self, query):
         try:
             result = self.cursor.execute(query)
             return result.fetchall()
         except Exception as error:
-            print(f"Error executing command {error}")
+            logger.error(f"Error executing command {error}")
             return None
 
     def close(self):
