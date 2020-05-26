@@ -1,14 +1,14 @@
 import cx_Oracle
+from .baseconnection import BaseConnection
 
-class Oracle:
+
+class Oracle(BaseConnection):
     def __init__(self, **kwargs):
+        super(Oracle, self).__init__(**kwargs)
         self.server = kwargs.get('server')
-        self.user = kwargs.get('user')
-        self.pwd = kwargs.get('pwd')
-        self.db = kwargs.get('database')
-        self.timeout = kwargs.get('timeout')
-    
-        db_config = (self.user + '/' + self.pwd + '@' + self.server + '/' + self.db)
+
+        db_config = (self.user + '/' + self.pwd +
+                     '@' + self.server + '/' + self.db_or_index)
 
         try:
             print('connecting to Oracle database...')
@@ -20,8 +20,8 @@ class Oracle:
             return None
 
         else:
-            print('connection established') 
-    
+            print('connection established')
+
     def query(self, query):
         try:
             result = self.cursor.execute(query)
@@ -29,7 +29,7 @@ class Oracle:
         except Exception as error:
             print(f"Error executing command {error}")
             return None
-    
+
     def close(self):
         self.connection.close()
         self.cursor.close()

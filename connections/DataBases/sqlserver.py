@@ -1,17 +1,15 @@
 import pyodbc
+from .baseconnection import BaseConnection
 
 
-class SqlServer:
+class SqlServer(BaseConnection):
     def __init__(self, **kwargs):
+        super(SqlServer, self).__init__(**kwargs)
         self.server = kwargs.get('server')
-        self.user = kwargs.get('user')
-        self.pwd = kwargs.get('pwd')
-        self.db = kwargs.get('database')
         self.driver = '{SQL Server}'
-        self.timeout = kwargs.get('timeout')
 
         db_config = ('DRIVER=' + self.driver + ';SERVER=' + self.server +
-                     ';DATABASE=' + self.db + ';UID=' + self.user + ';PWD=' + self.pwd)
+                     ';DATABASE=' + self.db_or_index + ';UID=' + self.user + ';PWD=' + self.pwd)
 
         try:
             print('connecting to SQL Server database...')

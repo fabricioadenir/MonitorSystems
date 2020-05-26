@@ -1,16 +1,14 @@
 import mysql.connector
+from .baseconnection import BaseConnection
 
 
-class MySql:
+class MySql(BaseConnection):
     def __init__(self, **kwargs):
+        super(MySql, self).__init__(**kwargs)
         self.server = kwargs.get('server')
-        self.user = kwargs.get('user')
-        self.pwd = kwargs.get('pwd')
-        self.db = kwargs.get('database')
-        self.timeout = kwargs.get('timeout')
-    
+
         db_config = {'user': self.user, 'password': self.pwd,
-                     'host': self.server, 'database': self.db}
+                     'host': self.server, 'database': self.db_or_index}
 
         try:
             print('connecting to MySql database...')
@@ -21,8 +19,8 @@ class MySql:
             print('Error: connection not established {}'.format(error))
             return None
         else:
-            print('connection established') 
-    
+            print('connection established')
+
     def query(self, query):
         try:
             result = self.cursor.execute(query)
@@ -30,7 +28,7 @@ class MySql:
         except Exception as error:
             print(f"Error executing command {error}")
             return None
-    
+
     def close(self):
         self.connection.close()
         self.cursor.close()
