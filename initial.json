@@ -1,0 +1,153 @@
+[
+    {
+        "model": "monitoring.client",
+        "pk": 1,
+        "fields": {
+            "name": "Time Marte",
+            "id_client": "UNJ-TM",
+            "created_date": "2020-05-26 13:00:00",
+            "modified_date": "2020-05-26 13:00:00"
+        }
+    },
+    {
+        "model": "monitoring.system",
+        "pk": 1,
+        "fields": {
+            "client": "UNJ-TM",
+            "name": "UNJ-MNI-Service",
+            "initials": "MNI",
+            "created_date": "2020-05-26 13:00:00",
+            "modified_date": "2020-05-26 13:00:00"
+        }
+    },
+    {
+        "model": "monitoring.system",
+        "pk": 2,
+        "fields": {
+            "client": "UNJ-TM",
+            "name": "Pasta Digital Integrada",
+            "initials": "PDIG",
+            "created_date": "2020-05-26 13:00:00",
+            "modified_date": "2020-05-26 13:00:00"
+        }
+    },
+    {
+        "model": "monitoring.system",
+        "pk": 3,
+        "fields": {
+            "client": "UNJ-TM",
+            "name": "Angelia",
+            "initials": "Angelia",
+            "created_date": "2020-05-26 13:00:00",
+            "modified_date": "2020-05-26 13:00:00"
+        }
+    },
+    {
+        "model": "monitoring.system",
+        "pk": 4,
+        "fields": {
+            "client": "UNJ-TM",
+            "name": "File Server",
+            "initials": "FileServer",
+            "created_date": "2020-05-26 13:00:00",
+            "modified_date": "2020-05-26 13:00:00"
+        }
+    },
+    {
+        "model": "monitoring.system",
+        "pk": 5,
+        "fields": {
+            "client": "UNJ-TM",
+            "name": "Chronos",
+            "initials": "Chronos",
+            "created_date": "2020-05-26 13:00:00",
+            "modified_date": "2020-05-26 13:00:00"
+        }
+    },
+    {
+        "model": "monitoring.module",
+        "pk": 1,
+        "fields": {
+            "system": 2,
+            "name": "Processo",
+            "description": "Responsável por processo",
+            "created_date": "2020-05-26 13:00:00",
+            "modified_date": "2020-05-26 13:00:00"
+        }
+    },
+    {
+        "model": "monitoring.module",
+        "pk": 2,
+        "fields": {
+            "system": 2,
+            "name": "Documentos",
+            "description": "Responsável por documentos",
+            "created_date": "2020-05-26 13:00:00",
+            "modified_date": "2020-05-26 13:00:00"
+        }
+    },
+    {
+        "model": "monitoring.module",
+        "pk": 3,
+        "fields": {
+            "system": 2,
+            "name": "Movimentações",
+            "description": "Responsável por movimentações",
+            "created_date": "2020-05-26 13:00:00",
+            "modified_date": "2020-05-26 13:00:00"
+        }
+    },
+    {
+        "model": "monitoring.functionality",
+        "pk": 1,
+        "fields": {
+            "module": 1,
+            "name": "Atualizar árvore processual",
+            "description": "Realiza uma nova consulta do processo no tribunal retorando atualizações se existir.",
+            "created_date": "2020-05-26 13:00:00",
+            "modified_date": "2020-05-26 13:00:00"
+        }
+    },
+    {
+        "model": "monitoring.functionality",
+        "pk": 2,
+        "fields": {
+            "module": 2,
+            "name": "Sincronizar documentos",
+            "description": "Realiza a consulta de todos os documentos deixando disponível para visualização.",
+            "created_date": "2020-05-26 13:00:00",
+            "modified_date": "2020-05-26 13:00:00"
+        }
+    },
+    {
+        "model": "monitoring.databases",
+        "pk": 1,
+        "fields": {
+            "client": "UNJ-TM",
+            "system": 2,
+            "_type": "mongodb",
+            "uri": "mongodb://userpdig:userpdig@localhost:27017",
+            "database": "pdig",
+            "created_date": "2020-05-26 13:00:00",
+            "modified_date": "2020-05-26 13:00:00"
+        }
+    },
+    {
+        "model": "monitoring.monitoring",
+        "pk": 1,
+        "fields": {
+            "name": "Sincronização de Documentos",
+            "source": "interno",
+            "description_source": "Monitorar documentos que estão sendo baixados pela funcioanlidade.",
+            "client": "UNJ-TM",
+            "system": 2,
+            "functionality": 2,
+            "database": 1,
+            "timeout": 20,
+            "query": "",
+            "created_date": "2020-05-26 13:00:00",
+            "modified_date": "2020-05-26 13:00:00"
+        }
+    }
+
+]
