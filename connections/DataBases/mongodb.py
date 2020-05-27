@@ -1,6 +1,7 @@
 from pymongo import MongoClient
 from .baseconnection import BaseConnection
 import logging
+import json
 
 logger = logging.getLogger(__name__)
 
@@ -13,7 +14,7 @@ class MongoDB(BaseConnection):
         self.collection = kwargs.get("collection")
 
         try:
-            logger.info("connecting to PostgreSQL database...")
+            logger.info("connecting to MongoDB database...")
             if self.uri:
                 self.client = MongoClient(self.uri)
             elif self.user and self.pwd:
@@ -29,10 +30,10 @@ class MongoDB(BaseConnection):
         try:
             db = self.client[self.db_or_index]
             collection = db[self.collection]
-            result = collection.find(query)
-            return result
+            result = collection.find(json.loads(query))
+            return list(result)
         except Exception as err:
-            logger(f"Error executing command {err}")
+            logger.error(f"Error executing command {err}")
             return None
 
     def close(self):

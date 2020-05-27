@@ -40,6 +40,8 @@ class ExecutingRoutines(object):
         data_connection['user'] = routine.query.database.user
         data_connection['pwd'] = routine.query.database.password
         data_connection['database'] = routine.query.database.database
+        data_connection['collection'] = routine.query.database.collection
+        data_connection['timeout'] = routine.query.timeout
 
         return query, data_connection
 

@@ -2,6 +2,7 @@ from .databases.postgres import Postgres
 from .databases.oracle import Oracle
 from .databases.sqlserver import SqlServer
 from .databases.mysql import MySql
+from .databases.mongodb import MongoDB
 import logging
 
 logger = logging.getLogger(__name__)
@@ -11,9 +12,9 @@ class GetResults:
 
     def get_results(self, query, _type, data):
         connector = self.__get_cursor(_type)
-        cursor = connector(**data)
         try:
-            if cursor:
+            if connector:
+                cursor = connector(**data)
                 results = cursor.query(query)
                 cursor.close()
                 return results
@@ -26,7 +27,8 @@ class GetResults:
             'sql_server': SqlServer,
             'oracle': Oracle,
             'mysql': MySql,
-            'postgresql': Postgres
+            'postgresql': Postgres,
+            'mongodb': MongoDB
         }
         cursor = connectios.get(_type)
         return cursor

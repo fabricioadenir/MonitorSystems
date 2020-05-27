@@ -19,18 +19,21 @@ class Connection():
     def __init__(self, *args, **kwargs):
         self.__timeout = kwargs.get('timeout')
         self.__type = kwargs.get('type')
-        self.__uri = args or None
+        self.__uri = kwargs.get('uri')
         self.__ip = kwargs.get('ip')
         self.__port = kwargs.get('port')
         self.__user = kwargs.get('user')
         self.__pwd = kwargs.get('pwd')
         self.__database = kwargs.get('database')
+        self.__collection = kwargs.get('collection')
         self.__server = kwargs.get('server')
 
     def __data_connect(self):
         data = {}
         if self.__uri:
             data['uri'] = self.__uri
+            data['database'] = self.__database
+            data['collection'] = self.__collection
             data['timeout'] = self.__timeout
             return data
         elif self.__server:
@@ -46,6 +49,7 @@ class Connection():
         data['user'] = self.__user
         data['pwd'] = self.__pwd
         data['database'] = self.__database
+        data['collection'] = self.__collection
         data['timeout'] = self.__timeout
         return data
 
