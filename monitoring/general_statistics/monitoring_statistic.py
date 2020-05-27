@@ -12,6 +12,6 @@ class MonitoringStatistic:
         return self.quantity_of_registered_monitoring
 
     def get_quantity_of_monitoring_waiting_for_activation(self):
-        self.quantity_of_monitoring_waiting_for_activation = 0
-        return 10
-
+        self.quantity_of_monitoring_waiting_for_activation = len(
+            Monitoring.objects.filter(is_enabled=False))
+        return self.quantity_of_monitoring_waiting_for_activation

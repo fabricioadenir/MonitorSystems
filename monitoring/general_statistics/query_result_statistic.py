@@ -18,7 +18,7 @@ class QueryResultsStatistic:
             "days_of_the_month": list(),
             "list_of_routines": list()
         }
-        self.the_top_3_with_errors = {}
+        self.the_top_3_with_errors = dict()
 
     def get_quantity_of_results_with_success(self):
         self.quantity_of_results_with_success = len(QueryResults.objects.filter(
