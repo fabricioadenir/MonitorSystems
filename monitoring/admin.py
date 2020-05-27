@@ -85,13 +85,13 @@ class MonitoringAdmin(admin.ModelAdmin):
     model = Monitoring
 
     list_display = ['name', 'source', 'description_source', 'client',
-                    'system', 'last_execution', 'functionality', 'timeout', 'created_date', 'modified_date']
+                    'system', 'last_execution', 'functionality', 'timeout', 'is_enabled', 'created_date', 'modified_date']
 
     list_filter = ['name', 'source', 'description_source', 'client',
                    'system', 'functionality', 'database',
-                   'timeout', 'last_execution', 'created_date', 'modified_date']
+                   'timeout', 'last_execution', 'is_enabled', 'created_date', 'modified_date']
 
-    search_fields = ['name', 'source', 'description_source', 'client__id_client', 'system__id',
+    search_fields = ['name', 'is_enabled', 'source', 'description_source', 'client__id_client', 'system__id',
                      'functionality__description', 'database__database', 'sql_qtd_consulta', 'sql_valores_consulta']
 
 
@@ -107,13 +107,17 @@ class QueryResultsAdmin(admin.ModelAdmin):
 
     search_fields = ['query', 'created_date', 'count_values', 'values']
 
+
 admin.site.register(QueryResults, QueryResultsAdmin)
+
 
 class RoutineAdmin(admin.ModelAdmin):
     model = Routines
-    list_display = ['query', 'active_query', 'initial_date', 'and_date', 'created_date', 'modified_date']
+    list_display = ['query', 'active_query', 'initial_date',
+                    'and_date', 'created_date', 'modified_date']
 
-    list_filter = ['query', 'active_query', 'initial_date', 'and_date', 'created_date', 'modified_date']
+    list_filter = ['query', 'active_query', 'initial_date',
+                   'and_date', 'created_date', 'modified_date']
 
     search_fields = ['query']
 

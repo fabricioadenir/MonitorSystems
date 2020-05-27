@@ -1,4 +1,5 @@
 from django.db import models
+from datetime import datetime
 
 
 class Client(models.Model):
@@ -96,6 +97,8 @@ class DataBases(models.Model):
         null=True, default=None, blank=True, max_length=50, verbose_name='URI ')
     database = models.CharField(
         max_length=100, verbose_name='DataBase ')
+    collection = models.CharField(
+        max_length=100, verbose_name='Coleção Mongo  ', null=True, blank=True)
     user = models.CharField(
         null=True, default=None, blank=True, max_length=100, verbose_name='Usuário ')
     password = models.CharField(
@@ -139,7 +142,9 @@ class Monitoring(models.Model):
     query = models.TextField(
         verbose_name='Query ')
     last_execution = models.DateField(verbose_name="Ultima execução",
-                                      null=True)
+                                      null=True, blank=True)
+    is_enabled = models.BooleanField(
+        verbose_name="Está Cadastrada ", default=False, editable=False)
     created_date = models.DateTimeField(
         verbose_name='Data criação ', editable=False, auto_now_add=True)
     modified_date = models.DateTimeField(
@@ -185,6 +190,20 @@ class Routines(models.Model):
         verbose_name='Data criação ', editable=False, auto_now_add=True)
     modified_date = models.DateTimeField(
         verbose_name='Data modificação ', editable=False, auto_now=True)
+
+    date = datetime.now().strftime("%Y-%m-%d")
+
+    def save(self, *args, **kwargs):
+        date_inicital = self.initial_date.strftime("%Y-%m-%d")
+        and_date = self.and_date.strftime("%Y-%m-%d")
+
+        if (date_inicital <= self.date) and (and_date >= self.date) and (self.active_query):
+            self.query.is_enabled = True
+            self.query.save(update_fields=['is_enabled'])
+        else:
+            self.query.is_enabled = False
+        self.query.save(update_fields=['is_enabled'])
+        super(Routines, self).save(*args, **kwargs)
 
     class Meta:
         verbose_name_plural = "Rotina"
