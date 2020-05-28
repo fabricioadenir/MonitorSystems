@@ -41,19 +41,30 @@ class QueryResultsStatistic:
             self.results["days_of_the_month"].append(execution_date)
 
             if list_of_routines.get(result.query.name):
-                list_of_routines[result.query.name].append(
-                    result.count_values)
+                list_of_routines[result.query.name].update(
+                    {execution_date: result.count_values})
             else:
                 list_of_routines.update(
                     {
-                        f"{result.query.name}": [result.count_values]
+                        f"{result.query.name}": {execution_date: result.count_values}
                     })
-
-        for key, value in list_of_routines.items():
-            self.results['list_of_routines'].append({key: value})
-
         self.results["days_of_the_month"] = list(
             set(self.results["days_of_the_month"]))
+
+        print(f"Lista de Rotinas: {list_of_routines}")
+
+        for dia in self.results['days_of_the_month']:
+            for chave, valores in list_of_routines.items():
+                if not valores.get(dia):
+                    list_of_routines[chave].update({dia: False})
+
+        self.results["days_of_the_month"].sort()
+        for key, value in list_of_routines.items():
+            aqui = dict(sorted(value.items()))
+            self.results['list_of_routines'].append(
+                {key: list(aqui.values())})
+
+        print(f"Lista de Rotinas: {self.results['list_of_routines']}")
 
         return self.results
 

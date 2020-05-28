@@ -104,6 +104,7 @@ demo = {
         return '#' + (Math.random().toString(16) + '0000000').slice(2, 8); 
       };
       for (const key in element) {
+        element[key].forEach(function(item, i) { if (item == false) element[key][i] = null; })
         rotina = {
           data: element[key],
           label: key,
@@ -168,7 +169,7 @@ demo = {
     var speedCanvas = document.getElementById("speedChart");
 
     var dataFirst = {
-      data: [0, 19, 15, 20, 30, 40, 40, 50, 25, 30, 50, 70],
+      data: [null, null, null, null, null, 40, 40, 50, 25, 30, 50, 70],
       fill: false,
       borderColor: '#fbc658',
       backgroundColor: 'transparent',
