@@ -22,12 +22,12 @@ class QueryResultsStatistic:
 
     def get_quantity_of_results_with_success(self):
         self.quantity_of_results_with_success = len(QueryResults.objects.filter(
-            count_values=0, created_date__gte=self.today).distinct())
+            count_values=0, created_date__gte=self.today).values('query').distinct())
         return self.quantity_of_results_with_success
 
     def get_quantity_of_results_with_errors(self):
         self.quantity_of_results_with_errors = len(QueryResults.objects.filter(
-            created_date__gte=self.today).exclude(count_values=0).distinct())
+            created_date__gte=self.today).values('query').distinct().exclude(count_values=0))
         return self.quantity_of_results_with_errors
 
     def get_results(self):
