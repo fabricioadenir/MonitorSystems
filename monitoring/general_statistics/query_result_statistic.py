@@ -1,6 +1,6 @@
 from monitoring.models import QueryResults
 from django.utils import timezone
-from datetime import date, timedelta
+from datetime import date, timedelta, datetime
 import locale
 
 
@@ -48,26 +48,38 @@ class QueryResultsStatistic:
                     {
                         f"{result.query.name}": {execution_date: result.count_values}
                     })
+
         self.results["days_of_the_month"] = list(
             set(self.results["days_of_the_month"]))
 
-        print(f"Lista de Rotinas: {list_of_routines}")
-
         for dia in self.results['days_of_the_month']:
             for chave, valores in list_of_routines.items():
-                if not valores.get(dia):
+                if not valores.get(dia) and valores.get(dia) != 0:
                     list_of_routines[chave].update({dia: False})
 
-        self.results["days_of_the_month"].sort()
+        self.results["days_of_the_month"].sort(
+            key=lambda dates: datetime.strptime(dates, "%d %b %y"))
+
         for key, value in list_of_routines.items():
             aqui = dict(sorted(value.items()))
             self.results['list_of_routines'].append(
                 {key: list(aqui.values())})
 
-        print(f"Lista de Rotinas: {self.results['list_of_routines']}")
-
         return self.results
 
     def get_the_top_3_with_errors(self):
-        self.the_top_3_with_errors = {}
-        return 10
+        results = QueryResults.objects.filter(
+            created_date__gte=self.today).exclude(count_values=0).distinct()
+
+        list_of_items_with_error = {
+            item.query.name: item.count_values for item in results}
+
+        self.the_top_3_with_errors = {key: rank for rank, key in enumerate(
+            sorted(list_of_items_with_error, key=list_of_items_with_error.get, reverse=True))}
+
+        for chave, valor in list_of_items_with_error.items():
+            self.the_top_3_with_errors[chave] = valor
+
+        self.the_top_3_with_errors = [
+            {chave: valor} for chave, valor in self.the_top_3_with_errors.items()]
+        return self.the_top_3_with_errors[:3]

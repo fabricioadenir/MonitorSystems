@@ -126,7 +126,7 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 # Routines execute
 EXECUTE_ROUTINE = True
-INTERVAL = 60
+INTERVAL = 120
 
 # Log Config
 LOGGING_CONFIG = None

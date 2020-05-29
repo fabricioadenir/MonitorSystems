@@ -94,22 +94,26 @@ demo = {
 
   },
 
-  initChartsPages: function(dados) {
+  initChartsPages: function(rotinas_com_erro, top_erros) {
     chartColor = "#FFFFFF";
-
-    rotinas = dados.list_of_routines;
+    rotinas = rotinas_com_erro.list_of_routines;
     erros = []
     rotinas.forEach(element => {
       var randomColorGenerator = function () { 
         return '#' + (Math.random().toString(16) + '0000000').slice(2, 8); 
       };
       for (const key in element) {
-        element[key].forEach(function(item, i) { if (item == false) element[key][i] = null; })
+        element[key].forEach(function(item, i) { if (item == false && item !== 0) element[key][i] = null; })
         rotina = {
           data: element[key],
           label: key,
           borderColor: randomColorGenerator(),
-          fill: false
+          pointRadius: 2,
+          pointBorderWidth: 4,
+          fill: true,
+          borderWidth: 1,
+          order: 0.4
+
         }
         erros.push(rotina);
       }
@@ -120,8 +124,9 @@ demo = {
     myChart = new Chart(ctx, {
       backgroundColor: "rgba(23, 100, 13, 0.1)",
       type: 'line',
+      hover: false,
       data: {
-        labels: dados.days_of_the_month,
+        labels: rotinas_com_erro.days_of_the_month,
         datasets: erros
       },
       options: {
@@ -130,7 +135,8 @@ demo = {
           text: 'World population per region (in millions)'
         },
         legend: {
-          display: false
+          display: false,
+          position: 'top'
         },
       }
     });
@@ -141,18 +147,29 @@ demo = {
     myChart = new Chart(ctx, {
       type: 'bar',
       data: {
-        labels: ["Documentos", "Fluxo", "Cadastro"],
         datasets: [{
-          label: "Erros Problematicos",
+          label: (top_erros.length >= 1 ? Object.keys(top_erros[0]) : "Sem Erros"),
+          data: (top_erros.length >= 1 ? Object.values(top_erros[0]) : 0),
           pointRadius: 10,
           pointHoverRadius: 40,
-          backgroundColor: [
-            '#fcc468',
-            '#ef8157',
-            '#4acccd',
-          ],
+          backgroundColor: '#fcc468',
           borderWidth: 0,
-          data: [342, 530, 120]
+        },
+        {
+          label: (top_erros.length >= 2 ? Object.keys(top_erros[1]) : "Sem Erros"),
+          data: (top_erros.length >= 2 ? Object.values(top_erros[1]) : 0),
+          pointRadius: 10,
+          pointHoverRadius: 40,
+          backgroundColor: '#ef8157',
+          borderWidth: 0,
+        },
+        {
+          label: (top_erros.length >= 3 ? Object.keys(top_erros[2]) : "Sem Erros"),
+          data: (top_erros.length >= 3 ? Object.values(top_erros[2]) : 0),
+          pointRadius: 10,
+          pointHoverRadius: 40,
+          backgroundColor: '#4acccd',
+          borderWidth: 0,
         }]
       },
       options: {
