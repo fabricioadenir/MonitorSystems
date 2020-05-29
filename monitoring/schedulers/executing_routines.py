@@ -1,5 +1,6 @@
 from .get_routines import GetRoutines
 from connections.connection import Connection
+from connections.get_results import GetResults
 from monitoring.models import QueryResults
 from datetime import date
 import logging
@@ -64,10 +65,9 @@ class ExecutingRoutines(object):
         for routine in self.all_routines:
             query, data_connect = self.build_info_executer(routine)
             query = self.build_query_for_type(query, data_connect['type'])
-            connection = Connection(**data_connect)
 
             if routine.query.last_execution == self.today:
                 continue
             else:
-                results = connection.execute(query)
+                results = GetResults().get_results(query, data_connect)
                 self.save_results(results, routine.query)
