@@ -3,6 +3,7 @@ from .databases.oracle import Oracle
 from .databases.sqlserver import SqlServer
 from .databases.mysql import MySql
 from .databases.mongodb import MongoDB
+from .databases._elasticsearch import MyElasticSearch
 import logging
 
 logger = logging.getLogger(__name__)
@@ -10,8 +11,8 @@ logger = logging.getLogger(__name__)
 
 class GetResults:
 
-    def get_results(self, query, _type, data):
-        connector = self.__get_cursor(_type)
+    def get_results(self, query, data):
+        connector = self.__get_cursor(data.get('type'))
         try:
             if connector:
                 cursor = connector(**data)
@@ -28,7 +29,8 @@ class GetResults:
             'oracle': Oracle,
             'mysql': MySql,
             'postgresql': Postgres,
-            'mongodb': MongoDB
+            'mongodb': MongoDB,
+            'elasticsearch': MyElasticSearch
         }
         cursor = connectios.get(_type)
         return cursor

@@ -1,6 +1,7 @@
 from elasticsearch import Elasticsearch
 from .baseconnection import BaseConnection
 import logging
+import json
 
 logger = logging.getLogger(__name__)
 
@@ -30,7 +31,7 @@ class MyElasticSearch(BaseConnection):
         try:
             result = self._elastic_search.search(
                 index=self.db_or_index,
-                body=query
+                body=json.loads(query)
             )
             return result
         except Exception as error:

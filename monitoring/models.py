@@ -79,7 +79,7 @@ class DataBases(models.Model):
         (u'mongodb', u'MongoDB'),
         (u'postgresql', u'PostgreSQL'),
         (u'mysql', u'MySQL'),
-        (u'uri', u'Via URI'),
+        (u'elasticsearch', u'ElascticSearch'),
     )
     client = models.ForeignKey(
         Client, on_delete=models.CASCADE, verbose_name='Cliente ')
