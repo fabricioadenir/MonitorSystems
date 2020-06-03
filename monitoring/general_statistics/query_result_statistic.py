@@ -34,36 +34,51 @@ class QueryResultsStatistic:
         locale.setlocale(locale.LC_ALL, 'pt_pt.UTF-8')
         how_many_days = 30  # Disponibilizar configuração
         time_threshold = timezone.now() - timedelta(days=how_many_days)
-        results = QueryResults.objects.filter(created_date__gte=time_threshold)
-        list_of_routines = {}
-        for result in results:
-            execution_date = result.created_date.strftime("%d %b %y").title()
-            self.results["days_of_the_month"].append(execution_date)
+        results = QueryResults.objects.filter(
+            created_date__gte=time_threshold).order_by('created_date')
 
-            if list_of_routines.get(result.query.name):
-                list_of_routines[result.query.name].update(
-                    {execution_date: result.count_values})
-            else:
-                list_of_routines.update(
-                    {
-                        f"{result.query.name}": {execution_date: result.count_values}
-                    })
+        list_dates = list(set([result.created_date.strftime("%d %b %y").title()
+                               for result in results]))
 
-        self.results["days_of_the_month"] = list(
-            set(self.results["days_of_the_month"]))
-
-        for dia in self.results['days_of_the_month']:
-            for chave, valores in list_of_routines.items():
-                if not valores.get(dia) and valores.get(dia) != 0:
-                    list_of_routines[chave].update({dia: False})
-
-        self.results["days_of_the_month"].sort(
+        list_dates.sort(
             key=lambda dates: datetime.strptime(dates, "%d %b %y"))
 
-        for key, value in list_of_routines.items():
-            aqui = dict(sorted(value.items()))
+        dicionario_de_rotinas = {}
+
+        # Cria um dicionario de rotinas com suas datas e erros por dia
+        for result in results:
+            execution_date = result.created_date.strftime("%d %b %y").title()
+            if dicionario_de_rotinas.get(result.query.name):
+                dicionario_de_rotinas[result.query.name].update(
+                    {execution_date: result.count_values}
+                )
+            else:
+                dicionario_de_rotinas.update(
+                    {
+                        f"{result.query.name}": {execution_date: result.count_values}
+                    }
+                )
+
+        for dia in list_dates:
+            for chave, valores in dicionario_de_rotinas.items():
+                if not valores.get(dia) and valores.get(dia) != 0:
+                    dicionario_de_rotinas[chave].update({dia: False})
+
+        for item in dicionario_de_rotinas:
+            dicionario_de_rotinas[item] = dict(sorted(
+                dicionario_de_rotinas[item].items(),
+                key=lambda x:  datetime.strptime(x[0], "%d %b %y")
+            ))
+
+        for rotina in dicionario_de_rotinas:
+            dicionario_de_rotinas[rotina] = list(
+                dicionario_de_rotinas[rotina].values())
+
+        for key, value in dicionario_de_rotinas.items():
             self.results['list_of_routines'].append(
-                {key: list(aqui.values())})
+                {key: value})
+
+        self.results['days_of_the_month'] = list_dates
 
         return self.results
 
