@@ -1,9 +1,12 @@
 from .get_results import GetResults
+import logging
+
+logger = logging.getLogger(__name__)
 
 
 class Connection():
     '''
-    Classe responsável por conectar ao banco de dados 
+    Classe responsável por conectar ao banco de dados
 
     Caso o banco de dados não se conecte via uri basta informar o tipo do banco ex: "MongoDB"
     **kwargs com os dados para conexão
@@ -16,19 +19,21 @@ class Connection():
     def __init__(self, *args, **kwargs):
         self.__timeout = kwargs.get('timeout')
         self.__type = kwargs.get('type')
-        self.__uri = args or None
+        self.__uri = kwargs.get('uri')
         self.__ip = kwargs.get('ip')
         self.__port = kwargs.get('port')
         self.__user = kwargs.get('user')
         self.__pwd = kwargs.get('pwd')
         self.__database = kwargs.get('database')
+        self.__collection = kwargs.get('collection')
         self.__server = kwargs.get('server')
-
 
     def __data_connect(self):
         data = {}
         if self.__uri:
             data['uri'] = self.__uri
+            data['database'] = self.__database
+            data['collection'] = self.__collection
             data['timeout'] = self.__timeout
             return data
         elif self.__server:
@@ -44,6 +49,7 @@ class Connection():
         data['user'] = self.__user
         data['pwd'] = self.__pwd
         data['database'] = self.__database
+        data['collection'] = self.__collection
         data['timeout'] = self.__timeout
         return data
 
@@ -51,6 +57,6 @@ class Connection():
         try:
             result = GetResults().get_results(query, self.__type, self.__data_connect())
             return result
-        except:
+        except Exception as error:
+            logger.error(f"Error in executing. Details: {error}")
             return None
-        

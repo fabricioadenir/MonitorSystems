@@ -2,21 +2,20 @@
 .vscode
 
 # Python
-core/__pycache__
-routine/__pycache__
-routine/schedulers/__pycache__
-system/__pycache__
+monitoring/__pycache__
+monitoring/schedulers/__pycache__
+monitoring/general_statistics/__pycache__
+monitorsystems/__pycache__
 connections/__pycache__
 connections/DataBases/__pycache__
 
 # Python Django
-core/migrations
-routine/migrations
+monitoring/migrations
 
 
 
 # SQLite
 db.sqlite3
 
-connections/DataBases/__pycache__/MySql.cpython-38.pyc
-connections/DataBases/__pycache__/MySql.cpython-38.pyc
+connections/databases/__pycache__
+connections/databases/__pycache__
