@@ -6,6 +6,9 @@ from monitoring.general_statistics.code_coverage_statistic import CodeCoverageSt
 from monitoring.general_statistics.routines_statistic import RoutineStatistic
 import logging
 # Create your views here.
+from .models import User
+
+
 
 logger = logging.getLogger(__name__)
 
@@ -36,4 +39,15 @@ def login(request):
 
 
 def user(request):
-    return render(request, 'monitoring/user.html')
+    users = User.objects.filter(id_user='fabricio.adenir').distinct()
+    user = users[0]
+    context = {
+        "username": user.name,
+        "user": user.id_user,
+        "email": user.email,
+        "team": user.team,
+        "positon": user.positon,
+        "detail": user.detail,
+        "photo": user.photo
+    }
+    return render(request, 'monitoring/user.html', context)

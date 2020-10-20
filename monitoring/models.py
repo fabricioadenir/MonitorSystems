@@ -2,6 +2,30 @@ from django.db import models
 from datetime import datetime
 
 
+class User(models.Model):
+    name = models.CharField(max_length=250, verbose_name='Nome ')
+    positon = models.CharField(max_length=250, verbose_name='Cargo ')
+    email = models.EmailField(verbose_name='E-mail ')
+    team = models.CharField(max_length=40, verbose_name='Time ')
+    detail = models.CharField(max_length=500, verbose_name='Detalhes ')
+    id_user = models.CharField(
+        primary_key=True, max_length=50, verbose_name='Usuário ')
+    password = models.CharField(
+        null=True, default=None, blank=True, max_length=50, verbose_name='Senha ')
+    photo = models.ImageField("Anexos", null=True, blank=True,
+                                upload_to='static/img')
+    created_date = models.DateTimeField(
+        verbose_name='Data criação ', editable=False, auto_now_add=True)
+    modified_date = models.DateTimeField(
+        verbose_name='Data modificação ', editable=False, auto_now=True)
+
+    def __str__(self):
+        return self.name
+
+    class Meta:
+        verbose_name_plural = "0-User"
+
+
 class Client(models.Model):
     name = models.CharField(max_length=250, verbose_name='Cliente ')
     id_client = models.CharField(
@@ -15,7 +39,7 @@ class Client(models.Model):
         return self.name
 
     class Meta:
-        verbose_name_plural = "Cliente"
+        verbose_name_plural = "1-Cliente"
 
 
 class System(models.Model):
@@ -33,7 +57,7 @@ class System(models.Model):
         return self.name
 
     class Meta:
-        verbose_name_plural = "Sistema"
+        verbose_name_plural = "2-Sistema"
 
 
 class Module(models.Model):
@@ -51,7 +75,7 @@ class Module(models.Model):
         return self.name
 
     class Meta:
-        verbose_name_plural = "Modulo"
+        verbose_name_plural = "3-Modulo"
 
 
 class Functionality(models.Model):
@@ -69,7 +93,7 @@ class Functionality(models.Model):
         return self.name
 
     class Meta:
-        verbose_name_plural = "Funcionalidade"
+        verbose_name_plural = "4-Funcionalidade"
 
 
 class DataBases(models.Model):
@@ -112,7 +136,7 @@ class DataBases(models.Model):
         return self.database
 
     class Meta:
-        verbose_name_plural = "DataBases"
+        verbose_name_plural = "5-DataBases"
 
 
 class Monitoring(models.Model):
@@ -136,7 +160,7 @@ class Monitoring(models.Model):
     functionality = models.ForeignKey(
         Functionality, on_delete=models.CASCADE, verbose_name='Local do sistema ')
     database = models.ForeignKey(
-        DataBases, on_delete=models.CASCADE, verbose_name='DataBase ')
+        DataBases, on_delete=models.CASCADE, verbose_name='DataBase ou Index')
     timeout = models.PositiveIntegerField(
         verbose_name='TimeOut em segundos ', help_text="Tempo de espera pela execução da query.")
     query = models.TextField(
@@ -154,7 +178,7 @@ class Monitoring(models.Model):
         return self.name
 
     class Meta:
-        verbose_name_plural = "Monitorar"
+        verbose_name_plural = "6-Monitorar"
 
 
 def increment_invoice_number():
@@ -177,7 +201,7 @@ class QueryResults(models.Model):
         return self.query.name
 
     class Meta:
-        verbose_name_plural = "QueryResults"
+        verbose_name_plural = "8-QueryResults"
 
 
 class Routines(models.Model):
@@ -206,4 +230,4 @@ class Routines(models.Model):
         super(Routines, self).save(*args, **kwargs)
 
     class Meta:
-        verbose_name_plural = "Rotina"
+        verbose_name_plural = "7-Rotina"

@@ -1,7 +1,19 @@
 from django.contrib import admin
 from django.shortcuts import redirect
-from .models import Client, System, Module, Functionality, Functionality, DataBases, Monitoring, QueryResults, Routines
-from .forms import BaseDeDadosForm
+from .models import Client, System, Module, Functionality, Functionality, DataBases, Monitoring, QueryResults, Routines, User
+from .forms import BaseDeDadosForm, UserForm
+
+
+class UserAdmin(admin.ModelAdmin):
+    form = UserForm
+    list_display = ['name', 'photo', 'id_user', 'positon', 'email', 'team', 'detail', 'created_date', 'modified_date']
+
+    list_filter = ['name', 'id_user', 'positon', 'email', 'team', 'detail', 'created_date', 'modified_date']
+
+    search_fields = ['name', 'id_user']
+
+
+admin.site.register(User, UserAdmin)
 
 
 class ClientAdmin(admin.ModelAdmin):
