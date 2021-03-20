@@ -10,7 +10,8 @@ connections/__pycache__
 connections/DataBases/__pycache__
 
 # Python Django
-monitoring/migrations
+monitoring/migrations/__pycache__
+monitoring/migrations/0*
 
 
 
