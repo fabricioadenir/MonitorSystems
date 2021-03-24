@@ -25,6 +25,7 @@ class Connection():
         self.__user = kwargs.get('user')
         self.__pwd = kwargs.get('pwd')
         self.__database = kwargs.get('database')
+        self.__index = kwargs.get('index')
         self.__collection = kwargs.get('collection')
         self.__server = kwargs.get('server')
 
@@ -32,6 +33,7 @@ class Connection():
         data = {}
         if self.__uri:
             data['uri'] = self.__uri
+            data['index'] = self.__index
             data['database'] = self.__database
             data['collection'] = self.__collection
             data['timeout'] = self.__timeout
@@ -49,6 +51,7 @@ class Connection():
         data['user'] = self.__user
         data['pwd'] = self.__pwd
         data['database'] = self.__database
+        data['index'] = self.__index
         data['collection'] = self.__collection
         data['timeout'] = self.__timeout
         return data

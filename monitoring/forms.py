@@ -1,5 +1,6 @@
 from django import forms
-from .models import DataBases, User
+from django.contrib.auth.forms import UserCreationForm
+from .models import DataBases, Profile
 
 
 class BaseDeDadosForm(forms.ModelForm):
@@ -11,10 +12,6 @@ class BaseDeDadosForm(forms.ModelForm):
         }
 
 
-class UserForm(forms.ModelForm):
-    class Meta:
-        model = User
-        fields = ('__all__')
-        widgets = {
-            'password': forms.PasswordInput(),
-        }
+class ProfileForm(UserCreationForm):
+    model = Profile
+    fields = "__all__"

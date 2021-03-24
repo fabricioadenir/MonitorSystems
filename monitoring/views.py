@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 import json
 from monitoring.general_statistics.monitoring_statistic import MonitoringStatistic
 from monitoring.general_statistics.query_result_statistic import QueryResultsStatistic
@@ -6,8 +6,7 @@ from monitoring.general_statistics.code_coverage_statistic import CodeCoverageSt
 from monitoring.general_statistics.routines_statistic import RoutineStatistic
 import logging
 # Create your views here.
-from .models import User
-
+from .models import Profile
 
 
 logger = logging.getLogger(__name__)
@@ -39,15 +38,19 @@ def login(request):
 
 
 def user(request):
-    users = User.objects.filter(id_user='fabricio.adenir').distinct()
-    user = users[0]
+    try:
+        logger.info("Buscando informações do usuário")
+        profile = Profile.objects.get(username="usuario_exemplo")
+    except Exception as e:
+        logger.error(f"Erro ao buscar info do usuário. Detalhes: {e}")
+        return redirect(dashboard)
     context = {
-        "username": user.name,
-        "user": user.id_user,
-        "email": user.email,
-        "team": user.team,
-        "positon": user.positon,
-        "detail": user.detail,
-        "photo": user.photo
+        "full_name": f"{profile.first_name} {profile.last_name}",
+        "username": profile.username,
+        "email": profile.email,
+        "team": profile.team,
+        "positon": profile.positon,
+        "detail": profile.detail,
+        "photo": profile.photo
     }
     return render(request, 'monitoring/user.html', context)
