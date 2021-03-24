@@ -1,19 +1,32 @@
+from .forms import BaseDeDadosForm, ProfileForm
 from django.contrib import admin
+from django.contrib.auth.admin import UserAdmin
 from django.shortcuts import redirect
-from .models import Client, System, Module, Functionality, Functionality, DataBases, Monitoring, QueryResults, Routines, User
-from .forms import BaseDeDadosForm, UserForm
+from .models import (Client, System, Module, Functionality,
+                     DataBases, Monitoring, QueryResults, Routines, Profile)
 
 
-class UserAdmin(admin.ModelAdmin):
-    form = UserForm
-    list_display = ['name', 'photo', 'id_user', 'positon', 'email', 'team', 'detail', 'created_date', 'modified_date']
+class ProfileAdmin(UserAdmin):
+    model = Profile
+    add_form = ProfileForm
 
-    list_filter = ['name', 'id_user', 'positon', 'email', 'team', 'detail', 'created_date', 'modified_date']
+    fieldsets = (
+        *UserAdmin.fieldsets,
+        (
+            'Informações do Cargo',
+            {
+                'fields': (
+                    'positon',
+                    'team',
+                    'detail',
+                    'photo'
+                )
+            }
+        )
+    )
 
-    search_fields = ['name', 'id_user']
 
-
-admin.site.register(User, UserAdmin)
+admin.site.register(Profile, ProfileAdmin)
 
 
 class ClientAdmin(admin.ModelAdmin):

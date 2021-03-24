@@ -9,7 +9,7 @@ class BaseConnection:
         self.port = kwargs.get('port')
         self.user = kwargs.get('user')
         self.pwd = kwargs.get('pwd')
-        self.db_or_index = kwargs.get('database')
+        self.db_or_index = kwargs.get('database', kwargs.get('index'))
         self.timeout = kwargs.get('timeout')
 
     def query(self, query):

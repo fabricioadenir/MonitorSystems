@@ -38,6 +38,7 @@ class ExecutingRoutines(object):
         data_connection['ip'] = routine.query.database.ip
         data_connection['port'] = routine.query.database.port
         data_connection['uri'] = routine.query.database.uri
+        data_connection['index'] = routine.query.database.index
         data_connection['user'] = routine.query.database.user
         data_connection['pwd'] = routine.query.database.password
         data_connection['database'] = routine.query.database.database
